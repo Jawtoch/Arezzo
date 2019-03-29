@@ -26,7 +26,7 @@ public class Main extends Application {
         menuFxmlLoader.setControllerFactory(ic -> new MenuController());
         root.setTop(menuFxmlLoader.load());
 
-        String[] notes = {"C,", "D,", "E,", "F,", "G,", "A,", "B,", "C", "D", "E", "F", "G", "A", "B", "c", "d", "e", "f", "g", "a"};
+        String[] notes = {"A", "^A", "B", "^B", "C", "D", "^D", "E", "^E", "F", "^F", "G"};
         Clavier clavier = new Clavier();
 
         for (String value: notes) {

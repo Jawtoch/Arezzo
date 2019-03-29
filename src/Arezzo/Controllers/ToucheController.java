@@ -13,6 +13,10 @@ public class ToucheController {
 
     @FXML public void initialize() throws Exception {
         this.button.setText(touche.getNote().getValue());
+        if (this.touche.getNote().getValue().contains("^")) {
+            this.button.setStyle("-fx-background-color: #000000");
+            this.button.setPrefHeight(this.button.getPrefHeight() / 2);
+        }
     }
 
     @FXML private void touchUpInsideAction() {

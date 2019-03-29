@@ -31,6 +31,10 @@ public class Clavier implements Iterable<Touche> {
         return this.touches;
     }
 
+    public int size() {
+        return this.touches.size();
+    }
+
     @Override
     public Iterator<Touche> iterator() {
         return this.touches.iterator();
