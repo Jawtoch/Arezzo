@@ -6,15 +6,11 @@ import javafx.scene.control.MenuItem;
 
 public class MenuController {
 
-    @FXML
-    MenuItem test;
-
     public MenuController() {
 
     }
 
-    @FXML
-    void quitButtonAction() {
+    @FXML void quitButtonAction() {
         Platform.exit();
     }
 

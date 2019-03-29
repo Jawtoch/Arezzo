@@ -10,9 +10,9 @@ import java.io.IOException;
 
 public class ListeNotesController {
 
-    ListeNotes listeNotes;
+    private ListeNotes listeNotes;
 
-    @FXML VBox liste;
+    @FXML private VBox liste;
 
     @FXML public void initialize() throws Exception {
         for(Note note: this.listeNotes) {

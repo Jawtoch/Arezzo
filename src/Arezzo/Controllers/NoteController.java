@@ -13,7 +13,7 @@ import javax.sound.midi.Synthesizer;
 
 public class NoteController {
 
-    Note note;
+    private Note note;
 
     @FXML private Button button;
     @FXML private Label label;

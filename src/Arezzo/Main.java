@@ -1,10 +1,13 @@
 package Arezzo;
 
+import Arezzo.Controllers.ClavierController;
 import Arezzo.Controllers.ListeNotesController;
 import Arezzo.Controllers.MenuController;
 import Arezzo.Controllers.NoteController;
+import Arezzo.Modele.Clavier;
 import Arezzo.Modele.ListeNotes;
 import Arezzo.Modele.Note;
+import Arezzo.Modele.Touche;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,23 +23,24 @@ public class Main extends Application {
 
         FXMLLoader menuFxmlLoader = new FXMLLoader();
         menuFxmlLoader.setLocation(getClass().getResource("Vues/VueMenu.fxml"));
-        menuFxmlLoader.setControllerFactory(ic->new MenuController());
+        menuFxmlLoader.setControllerFactory(ic -> new MenuController());
         root.setTop(menuFxmlLoader.load());
 
         String[] notes = {"C,", "D,", "E,", "F,", "G,", "A,", "B,", "C", "D", "E", "F", "G", "A", "B", "c", "d", "e", "f", "g", "a"};
-        ListeNotes listeNotes = new ListeNotes();
+        Clavier clavier = new Clavier();
+
         for (String value: notes) {
-            listeNotes.ajouter(new Note(value));
+            clavier.ajouterTouches(new Touche(new Note(value)));
         }
 
-        FXMLLoader listeNotesFxmlLoader = new FXMLLoader();
-        listeNotesFxmlLoader.setLocation(getClass().getResource("Vues/VueListeNotes.fxml"));
-        listeNotesFxmlLoader.setControllerFactory(ic->new ListeNotesController(listeNotes));
+        FXMLLoader clavierFxmlLoader = new FXMLLoader();
+        clavierFxmlLoader.setLocation(getClass().getResource("Vues/VueClavier.fxml"));
+        clavierFxmlLoader.setControllerFactory(ic -> new ClavierController(clavier));
 
-        root.setCenter(listeNotesFxmlLoader.load());
+        root.setCenter(clavierFxmlLoader.load());
 
         primaryStage.setTitle("Arezzo");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 800, 300));
         primaryStage.show();
     }
 

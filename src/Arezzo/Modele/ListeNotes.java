@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class ListeNotes implements Iterable<Note> {
 
-    ArrayList<Note> noteArrayList = new ArrayList<>();
+    private ArrayList<Note> noteArrayList = new ArrayList<>();
 
     public ListeNotes() {
 
@@ -24,8 +24,7 @@ public class ListeNotes implements Iterable<Note> {
         return this.noteArrayList.contains(note);
     }
 
-    @Override
-    public Iterator<Note> iterator() {
+    @Override public Iterator<Note> iterator() {
         return this.noteArrayList.iterator();
     }
 }

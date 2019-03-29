@@ -2,7 +2,7 @@ package Arezzo.Modele;
 
 public class Note {
 
-    String value;
+    private String value;
 
     public Note(String value) {
         this.value = value;
