@@ -23,7 +23,7 @@ public class NoteController {
         this.button.setText("Ecouter");
     }
 
-    @FXML private void jouer() {
+    public void play() {
         try {
             Synthesizer synthesizer = MidiSystem.getSynthesizer();
 
