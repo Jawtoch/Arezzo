@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class ClavierController {
 
     private Clavier clavier;
+    private PartitionController partitionController;
 
     @FXML private Pane pane;
 
@@ -25,7 +26,7 @@ public class ClavierController {
         for(Touche touche: this.clavier) {
             FXMLLoader toucheFxmlLoader = new FXMLLoader();
             toucheFxmlLoader.setLocation(getClass().getResource("../Vues/VueTouche.fxml"));
-            toucheFxmlLoader.setControllerFactory(ic -> new ToucheController(touche));
+            toucheFxmlLoader.setControllerFactory(ic -> new ToucheController(touche, this.partitionController));
 
             AnchorPane element = toucheFxmlLoader.load();
 
@@ -49,7 +50,8 @@ public class ClavierController {
         }
     }
 
-    public ClavierController(Clavier clavier) {
+    public ClavierController(Clavier clavier, PartitionController partitionController) {
         this.clavier = clavier;
+        this.partitionController = partitionController;
     }
 }

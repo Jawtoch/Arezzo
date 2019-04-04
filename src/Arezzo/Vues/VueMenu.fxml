@@ -19,10 +19,10 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Outils">
             <items>
-              <MenuItem fx:id="test" mnemonicParsing="false" text="Renommer" />
                   <MenuItem mnemonicParsing="false" text="Transposer" />
             </items>
           </Menu>
+            <Menu fx:id="devices" mnemonicParsing="false" text="Périphérique" />
         </menus>
       </MenuBar>
    </children>

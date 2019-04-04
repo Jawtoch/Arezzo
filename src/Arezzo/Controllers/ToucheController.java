@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 public class ToucheController {
 
     private Touche touche;
-    private NoteController noteController;
+    private PartitionController partitionController;
 
     @FXML private Button button;
 
@@ -20,11 +20,11 @@ public class ToucheController {
     }
 
     @FXML private void touchUpInsideAction() {
-        this.noteController.play();
+        this.partitionController.ajouterNote(this.touche.getNote().getValue());
     }
 
-    public ToucheController(Touche touche) {
+    public ToucheController(Touche touche, PartitionController partitionController) {
         this.touche = touche;
-        this.noteController = new NoteController(this.touche.getNote());
+        this.partitionController = partitionController;
     }
 }

@@ -31,7 +31,7 @@ public class NoteController {
             partition.setMelodie(this.note.getValue());
 
             // MARK: - Uncomment for sound
-            //partition.play();
+            partition.play();
             System.out.println("Playing sound " + this.note.getValue());
         } catch (MidiUnavailableException e) {
             e.printStackTrace();
