@@ -32,7 +32,7 @@ public class ClavierController {
 
             if (touche.getNote().getValue().contains("^")) {
                 // Noire
-                element.relocate(lastXPosition + toucheSize / 2, 0);
+                element.relocate(lastXPosition + (toucheSize >> 1), 0);
                 element.setPrefHeight(element.getPrefHeight() / 2);
                 noires.add(element);
             } else {
