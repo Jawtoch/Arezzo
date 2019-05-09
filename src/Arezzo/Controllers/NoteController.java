@@ -38,7 +38,7 @@ public class NoteController {
         }
     }
     
-    public NoteController(Note note) {
+    NoteController(Note note) {
         this.note = note;
     }
 

@@ -8,11 +8,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ClavierController {
+public class ClavierController implements Observer {
 
     private Clavier clavier;
     private PartitionController partitionController;
+    private String noteType = "medium";
 
     @FXML private Pane pane;
 
@@ -53,5 +56,11 @@ public class ClavierController {
     public ClavierController(Clavier clavier, PartitionController partitionController) {
         this.clavier = clavier;
         this.partitionController = partitionController;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        PitchController pitchController = (PitchController) o;
+        this.noteType = pitchController.getType();
     }
 }

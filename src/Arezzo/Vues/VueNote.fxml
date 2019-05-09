@@ -10,7 +10,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" text="Une note" textAlignment="CENTER" />
-            <Button fx:id="button" mnemonicParsing="false" text="Button" />
+            <Button fx:id="button" onAction="#play" mnemonicParsing="false" text="Button" />
          </children>
       </HBox>
    </children>

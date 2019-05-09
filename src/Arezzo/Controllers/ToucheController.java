@@ -20,10 +20,10 @@ public class ToucheController {
     }
 
     @FXML private void touchUpInsideAction() {
-        this.partitionController.ajouterNote(this.touche.getNote().getValue());
+        this.partitionController.ajouterNote(this.touche.getNote());
     }
 
-    public ToucheController(Touche touche, PartitionController partitionController) {
+    ToucheController(Touche touche, PartitionController partitionController) {
         this.touche = touche;
         this.partitionController = partitionController;
     }

@@ -1,8 +1,6 @@
 package Arezzo;
 
-import Arezzo.Controllers.ClavierController;
-import Arezzo.Controllers.MenuController;
-import Arezzo.Controllers.PartitionController;
+import Arezzo.Controllers.*;
 import Arezzo.Modele.Clavier;
 import Arezzo.Modele.Note;
 import Arezzo.Modele.Touche;
@@ -48,8 +46,22 @@ public class Main extends Application {
         FXMLLoader clavierFxmlLoader = new FXMLLoader();
         clavierFxmlLoader.setLocation(getClass().getResource("Vues/VueClavier.fxml"));
         clavierFxmlLoader.setControllerFactory(ic -> new ClavierController(clavier, partitionController));
-
         root.setBottom(clavierFxmlLoader.load());
+
+        //FXMLLoader pitchFxmlLoader = new FXMLLoader();
+        //pitchFxmlLoader.setLocation(getClass().getResource("Vues/VuePitch.fxml"));
+        //pitchFxmlLoader.setControllerFactory(ic -> new PitchController());
+        //root.setRight(pitchFxmlLoader.load());
+
+        FXMLLoader listeFxmlLoader = new FXMLLoader();
+        listeFxmlLoader.setLocation(getClass().getResource("Vues/VueListeNotes.fxml"));
+
+        listeFxmlLoader.setControllerFactory(ic -> {
+            ListeNotesController listeNotesController = new ListeNotesController(partitionController);
+            partitionController.addObserver(listeNotesController);
+            return listeNotesController;
+        });
+        root.setRight(listeFxmlLoader.load());
 
         primaryStage.setTitle("Arezzo");
         primaryStage.setScene(new Scene(root, 800, 300));

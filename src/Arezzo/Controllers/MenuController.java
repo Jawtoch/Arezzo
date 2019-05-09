@@ -12,10 +12,8 @@ import javax.sound.midi.*;
 public class MenuController {
 
     @FXML private Menu devices;
-    private Clavier clavier;
 
     public MenuController(Clavier clavier) {
-        this.clavier = clavier;
     }
 
     @FXML public void initialize() throws Exception {
