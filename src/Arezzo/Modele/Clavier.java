@@ -3,9 +3,10 @@ package Arezzo.Modele;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Clavier implements Iterable<Touche> {
+public class Clavier implements Iterable<Touche>, ToucheDelegate {
 
     private ArrayList<Touche> touches = new ArrayList<>();
+    public ClavierDelegate delegate;
 
     public Clavier() {
     }
@@ -13,13 +14,14 @@ public class Clavier implements Iterable<Touche> {
     public void ajouterTouches(Touche... touches) {
         for(Touche touche: touches) {
             this.touches.add(touche);
+            touche.delegate = this;
         }
     }
 
     public void supprimerTouches(Touche... touches) {
+
         for(Touche touche: touches) {
-            if (this.touches.contains(touche))
-                this.touches.remove(touche);
+            this.touches.remove(touche);
         }
     }
 
@@ -38,5 +40,11 @@ public class Clavier implements Iterable<Touche> {
     @Override
     public Iterator<Touche> iterator() {
         return this.touches.iterator();
+    }
+
+    @Override
+    public void touchUpInside(Note note) {
+        if(this.delegate != null)
+            this.delegate.ajouterNote(note);
     }
 }

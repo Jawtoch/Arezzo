@@ -1,6 +1,8 @@
 package Arezzo.Controllers;
 
 import Arezzo.Modele.Clavier;
+import Arezzo.Modele.ClavierDelegate;
+import Arezzo.Modele.Note;
 import Arezzo.Modele.Touche;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ClavierController implements Observer {
+public class ClavierController implements Observer, ClavierDelegate {
 
     private Clavier clavier;
     private PartitionController partitionController;
@@ -55,6 +57,7 @@ public class ClavierController implements Observer {
 
     public ClavierController(Clavier clavier, PartitionController partitionController) {
         this.clavier = clavier;
+        this.clavier.delegate = this;
         this.partitionController = partitionController;
     }
 
@@ -62,5 +65,10 @@ public class ClavierController implements Observer {
     public void update(Observable o, Object arg) {
         PitchController pitchController = (PitchController) o;
         this.noteType = pitchController.getType();
+    }
+
+    @Override
+    public void ajouterNote(Note note) {
+
     }
 }

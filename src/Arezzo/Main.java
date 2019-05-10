@@ -22,7 +22,7 @@ public class Main extends Application {
         Synthesizer synthesizer = MidiSystem.getSynthesizer();
         Partition partition = new Partition(synthesizer);
 
-        String[] notes = {"A", "^A", "B", "^B", "C", "D", "^D", "E", "^E", "F", "^F", "G"};
+        String[] notes = {"C", "^C", "D", "^D", "E", "F", "^F", "G", "^G", "A", "^A", "B"};
         Clavier clavier = new Clavier();
 
         for (String value: notes) {

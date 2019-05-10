@@ -3,7 +3,7 @@ package Arezzo.Modele;
 public class Touche {
 
     private Note note;
-    private ToucheDelegate delegate;
+    ToucheDelegate delegate;
 
     public Touche(Note note) {
         this.note = note;
