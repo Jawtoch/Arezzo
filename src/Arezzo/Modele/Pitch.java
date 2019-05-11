@@ -2,13 +2,15 @@ package Arezzo.Modele;
 
 public class Pitch {
 
-    String currentPitch;
+    private String currentPitch;
 
     Pitch() {
+        System.out.println("[Pitch init:]");
         this.currentPitch = "medium";
     }
 
     Note transform(Note src) {
+        System.out.println("[Pitch transform:" + src + "]");
         Note n;
         switch (this.currentPitch) {
             case "grave":
@@ -20,5 +22,10 @@ public class Pitch {
             default:
                 return src;
         }
+    }
+
+    public void setCurrentPitch(String pitch) {
+        System.out.println("[Pitch setCurrentPitch:" + pitch + "]");
+        this.currentPitch = pitch;
     }
 }

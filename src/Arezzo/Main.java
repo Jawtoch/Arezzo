@@ -2,6 +2,7 @@ package Arezzo;
 
 import Arezzo.Controllers.*;
 import Arezzo.Modele.Clavier;
+import Arezzo.Modele.ListeNotes;
 import Arezzo.Modele.Note;
 import Arezzo.Modele.Touche;
 import javafx.application.Application;
@@ -29,12 +30,17 @@ public class Main extends Application {
             clavier.ajouterTouches(new Touche(new Note(value)));
         }
 
+        ListeNotes listeNotes = new ListeNotes();
+
         BorderPane root = new BorderPane();
 
         FXMLLoader partitionFxmlLoader = new FXMLLoader();
         partitionFxmlLoader.setLocation(getClass().getResource("Vues/VuePartition.fxml"));
         PartitionController partitionController = new PartitionController(partition);
-        partitionFxmlLoader.setControllerFactory(ic -> partitionController);
+        partitionFxmlLoader.setControllerFactory(ic -> {
+            partitionController.setListeNote(listeNotes);
+            return  partitionController;
+        });
         root.setCenter(partitionFxmlLoader.load());
 
         FXMLLoader menuFxmlLoader = new FXMLLoader();
@@ -45,7 +51,11 @@ public class Main extends Application {
 
         FXMLLoader clavierFxmlLoader = new FXMLLoader();
         clavierFxmlLoader.setLocation(getClass().getResource("Vues/VueClavier.fxml"));
-        clavierFxmlLoader.setControllerFactory(ic -> new ClavierController(clavier, partitionController));
+        clavierFxmlLoader.setControllerFactory(ic -> {
+            ClavierController clavierController = new ClavierController(clavier);
+            clavierController.setListeNotes(listeNotes);
+            return clavierController;
+        });
         root.setBottom(clavierFxmlLoader.load());
 
         //FXMLLoader pitchFxmlLoader = new FXMLLoader();
@@ -56,11 +66,7 @@ public class Main extends Application {
         FXMLLoader listeFxmlLoader = new FXMLLoader();
         listeFxmlLoader.setLocation(getClass().getResource("Vues/VueListeNotes.fxml"));
 
-        listeFxmlLoader.setControllerFactory(ic -> {
-            ListeNotesController listeNotesController = new ListeNotesController(partitionController);
-            partitionController.addObserver(listeNotesController);
-            return listeNotesController;
-        });
+        listeFxmlLoader.setControllerFactory(ic -> new ListeNotesController(listeNotes));
         root.setRight(listeFxmlLoader.load());
 
         primaryStage.setTitle("Arezzo");

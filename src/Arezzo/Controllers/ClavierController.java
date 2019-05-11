@@ -1,27 +1,22 @@
 package Arezzo.Controllers;
 
-import Arezzo.Modele.Clavier;
-import Arezzo.Modele.ClavierDelegate;
-import Arezzo.Modele.Note;
-import Arezzo.Modele.Touche;
+import Arezzo.Modele.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
-public class ClavierController implements Observer, ClavierDelegate {
+public class ClavierController implements ClavierDelegate {
 
     private Clavier clavier;
-    private PartitionController partitionController;
-    private String noteType = "medium";
+    private ListeNotes listeNotes;
 
     @FXML private Pane pane;
 
     @FXML public void initialize() throws Exception {
+        System.out.println("[ClavierController initialize:]");
 
         int toucheSize = 40;
         int lastXPosition = -40;
@@ -31,7 +26,7 @@ public class ClavierController implements Observer, ClavierDelegate {
         for(Touche touche: this.clavier) {
             FXMLLoader toucheFxmlLoader = new FXMLLoader();
             toucheFxmlLoader.setLocation(getClass().getResource("../Vues/VueTouche.fxml"));
-            toucheFxmlLoader.setControllerFactory(ic -> new ToucheController(touche, this.partitionController));
+            toucheFxmlLoader.setControllerFactory(ic -> new ToucheController(touche));
 
             AnchorPane element = toucheFxmlLoader.load();
 
@@ -55,20 +50,20 @@ public class ClavierController implements Observer, ClavierDelegate {
         }
     }
 
-    public ClavierController(Clavier clavier, PartitionController partitionController) {
+    public ClavierController(Clavier clavier) {
+        System.out.println("[ClavierController init:]");
         this.clavier = clavier;
         this.clavier.delegate = this;
-        this.partitionController = partitionController;
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        PitchController pitchController = (PitchController) o;
-        this.noteType = pitchController.getType();
+    public void setListeNotes(ListeNotes listeNotes) {
+        System.out.println("[ClavierController setListeNote:" + listeNotes + "]");
+        this.listeNotes = listeNotes;
     }
 
     @Override
     public void ajouterNote(Note note) {
-
+        System.out.println("[ClavierController ajouterNote:" + note + "]");
+        this.listeNotes.ajouterNote(note);
     }
 }

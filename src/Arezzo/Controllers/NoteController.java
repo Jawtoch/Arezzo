@@ -19,11 +19,13 @@ public class NoteController {
     @FXML private Label label;
 
     @FXML public void initialize() throws Exception {
+        System.out.println("[NoteController initialize:]");
         this.label.setText(note.getValue());
         this.button.setText("Ecouter");
     }
 
     public void play() {
+        System.out.println("[NoteController play:]");
         try {
             Synthesizer synthesizer = MidiSystem.getSynthesizer();
 
@@ -39,6 +41,7 @@ public class NoteController {
     }
     
     NoteController(Note note) {
+        System.out.println("[NoteController init:]");
         this.note = note;
     }
 

@@ -7,11 +7,11 @@ import javafx.scene.control.Button;
 public class ToucheController {
 
     private Touche touche;
-    private PartitionController partitionController;
 
     @FXML private Button button;
 
     @FXML public void initialize() throws Exception {
+        System.out.println("[ToucheController initialize:]");
         this.button.setText(touche.getNote().getValue());
         if (this.touche.getNote().getValue().contains("^")) {
             this.button.setStyle("-fx-background-color: #000000");
@@ -20,11 +20,12 @@ public class ToucheController {
     }
 
     @FXML private void touchUpInsideAction() {
-        this.partitionController.ajouterNote(this.touche.getNote());
+        System.out.println("[ToucheController touchUpInsideAction:]");
+        this.touche.pressed();
     }
 
-    ToucheController(Touche touche, PartitionController partitionController) {
+    ToucheController(Touche touche) {
+        System.out.println("[ToucheController init:]");
         this.touche = touche;
-        this.partitionController = partitionController;
     }
 }

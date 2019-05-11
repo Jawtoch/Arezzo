@@ -14,9 +14,11 @@ public class MenuController {
     @FXML private Menu devices;
 
     public MenuController(Clavier clavier) {
+        System.out.println("[MenuController init:" + clavier + "]");
     }
 
     @FXML public void initialize() throws Exception {
+        System.out.println("[MenuController initialize:]");
         ToggleGroup toggleGroup = new ToggleGroup();
 
         for(MidiDevice.Info info: MidiSystem.getMidiDeviceInfo()) {
@@ -28,6 +30,7 @@ public class MenuController {
     }
 
     @FXML void quitButtonAction() {
+        System.out.println("[MenuController quitButtonAction:]");
         Platform.exit();
     }
 

@@ -3,47 +3,38 @@ package Arezzo.Controllers;
 import Arezzo.Modele.ListeNotes;
 import Arezzo.Modele.Note;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ListView;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 
 public class ListeNotesController implements Observer {
 
-    private PartitionController partitionController;
+    private ListeNotes listeNotes;
 
-    @FXML private VBox liste;
+    @FXML private ListView<Note> listView;
 
     @FXML public void initialize() throws Exception {
-        for(Note note: this.partitionController.getNotes()) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../Vues/VueNote.fxml"));
-            fxmlLoader.setControllerFactory(ic -> new NoteController(note));
-            this.liste.getChildren().add(fxmlLoader.load());
-        }
+        System.out.println("[ListeNotesController initialize:]");
+        this.creerLaListe();
 
     }
 
-    public ListeNotesController(PartitionController partitionController) {
-        this.partitionController = partitionController;
+    public ListeNotesController(ListeNotes listeNotes) {
+        System.out.println("[ListeNotesController init:" + listeNotes + "]");
+        this.listeNotes = listeNotes;
+        this.listeNotes.addObserver(this);
+    }
+
+    private void creerLaListe() {
+        System.out.println("[ListeNotesController creerLaListe:]");
+
+        this.listView.setItems(this.listeNotes.getList());
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        this.liste.getChildren().clear();
-        for(Note note: this.partitionController.getNotes()) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../Vues/VueNote.fxml"));
-            fxmlLoader.setControllerFactory(ic -> new NoteController(note));
-
-            try {
-                this.liste.getChildren().add(fxmlLoader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        System.out.println("[ListeNotesController update:" + o + " " + arg + "]");
+        this.creerLaListe();
     }
 }
