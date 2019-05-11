@@ -1,14 +1,12 @@
 package Arezzo;
 
 import Arezzo.Controllers.*;
-import Arezzo.Modele.Clavier;
-import Arezzo.Modele.ListeNotes;
-import Arezzo.Modele.Note;
-import Arezzo.Modele.Touche;
+import Arezzo.Modele.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import partition.Partition;
 
@@ -48,6 +46,7 @@ public class Main extends Application {
         menuFxmlLoader.setControllerFactory(ic -> new MenuController(clavier));
         root.setTop(menuFxmlLoader.load());
 
+        HBox hBox = new HBox();
 
         FXMLLoader clavierFxmlLoader = new FXMLLoader();
         clavierFxmlLoader.setLocation(getClass().getResource("Vues/VueClavier.fxml"));
@@ -56,12 +55,18 @@ public class Main extends Application {
             clavierController.setListeNotes(listeNotes);
             return clavierController;
         });
-        root.setBottom(clavierFxmlLoader.load());
 
-        //FXMLLoader pitchFxmlLoader = new FXMLLoader();
-        //pitchFxmlLoader.setLocation(getClass().getResource("Vues/VuePitch.fxml"));
-        //pitchFxmlLoader.setControllerFactory(ic -> new PitchController());
-        //root.setRight(pitchFxmlLoader.load());
+        hBox.getChildren().add(clavierFxmlLoader.load());
+
+        Pitch pitch = new Pitch();
+        listeNotes.setPitch(pitch);
+
+        FXMLLoader pitchFxmlLoader = new FXMLLoader();
+        pitchFxmlLoader.setLocation(getClass().getResource("Vues/VuePitch.fxml"));
+        pitchFxmlLoader.setControllerFactory(ic -> new PitchController(pitch));
+        hBox.getChildren().add(pitchFxmlLoader.load());
+
+        root.setBottom(hBox);
 
         FXMLLoader listeFxmlLoader = new FXMLLoader();
         listeFxmlLoader.setLocation(getClass().getResource("Vues/VueListeNotes.fxml"));

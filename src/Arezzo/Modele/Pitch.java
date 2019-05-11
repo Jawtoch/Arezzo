@@ -4,7 +4,7 @@ public class Pitch {
 
     private String currentPitch;
 
-    Pitch() {
+    public Pitch() {
         System.out.println("[Pitch init:]");
         this.currentPitch = "medium";
     }
