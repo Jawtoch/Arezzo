@@ -19,16 +19,17 @@ public class PitchController {
 
         this.toggleGroup = new ToggleGroup();
 
-        this.lowPitchButton.setText("aïgue");
-        this.mediumPitchButton.setText("medium");
-        this.highPitchButton.setText("grave");
+        this.lowPitchButton.setText(Pitch.PitchType.AÏGUE.name());
+        this.mediumPitchButton.setText(Pitch.PitchType.MEDIUM.name());
+        this.highPitchButton.setText(Pitch.PitchType.GRAVE.name());
 
         toggleGroup.getToggles().addAll(this.lowPitchButton, this.mediumPitchButton, this.highPitchButton);
         this.mediumPitchButton.setSelected(true);
 
         toggleGroup.selectedToggleProperty().addListener(event -> {
             RadioButton radioButton = (RadioButton) this.toggleGroup.getSelectedToggle();
-            this.pitch.setCurrentPitch(radioButton.getText());
+            String string = radioButton.getText();
+            this.pitch.setCurrentPitch(Pitch.PitchType.valueOf(string));
         });
     }
 

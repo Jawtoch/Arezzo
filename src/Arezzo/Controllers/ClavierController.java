@@ -1,6 +1,7 @@
 package Arezzo.Controllers;
 
 import Arezzo.Modele.*;
+import abc.notation.Note;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -30,7 +31,10 @@ public class ClavierController implements ClavierDelegate {
 
             AnchorPane element = toucheFxmlLoader.load();
 
-            if (touche.getNote().getValue().contains("^")) {
+            Note note = touche.getNote();
+            String name = NoteFormatter.format(note);
+
+            if (name.contains("^")) {
                 // Noire
                 element.relocate(lastXPosition + (toucheSize >> 1), 0);
                 element.setPrefHeight(element.getPrefHeight() / 2);
@@ -62,7 +66,7 @@ public class ClavierController implements ClavierDelegate {
     }
 
     @Override
-    public void ajouterNote(Note note) {
+    public void ajouterNote(abc.notation.Note note) {
         System.out.println("[ClavierController ajouterNote:" + note + "]");
         this.listeNotes.ajouterNote(note);
     }

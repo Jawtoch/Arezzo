@@ -2,6 +2,7 @@ package Arezzo;
 
 import Arezzo.Controllers.*;
 import Arezzo.Modele.*;
+import abc.notation.Note;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,11 +22,18 @@ public class Main extends Application {
         Synthesizer synthesizer = MidiSystem.getSynthesizer();
         Partition partition = new Partition(synthesizer);
 
-        String[] notes = {"C", "^C", "D", "^D", "E", "F", "^F", "G", "^G", "A", "^A", "B"};
+        //String[] notes = {"C", "^C", "D", "^D", "E", "F", "^F", "G", "^G", "A", "^A", "B"};
         Clavier clavier = new Clavier();
 
-        for (String value: notes) {
-            clavier.ajouterTouches(new Touche(new Note(value)));
+        abc.notation.Note note = new abc.notation.Note((byte)0);
+
+        //for (String value: notes) {
+        //    clavier.ajouterTouches(new Touche(new Note(value)));
+        //}
+
+        for(int i = 0; i < 12; i++) {
+            Note n = Note.transpose(note, i);
+            clavier.ajouterTouches(new Touche(n));
         }
 
         ListeNotes listeNotes = new ListeNotes();

@@ -2,29 +2,37 @@ package Arezzo.Modele;
 
 public class Pitch {
 
-    private String currentPitch;
+    private PitchType currentPitch;
+
+    private static byte GRAVE = -1;
+    private static byte MEDIUM = 0;
+    private static byte AÏGUE = 1;
+
+    public enum PitchType {
+        GRAVE, MEDIUM, AÏGUE;
+    }
 
     public Pitch() {
         System.out.println("[Pitch init:]");
-        this.currentPitch = "medium";
+        this.currentPitch = PitchType.MEDIUM;
     }
 
-    Note transform(Note src) {
+    void transform(abc.notation.Note src) {
         System.out.println("[Pitch transform:" + src + "]");
-        Note n;
         switch (this.currentPitch) {
-            case "grave":
-                n = new Note(src.getValue() + ",");
-                return n;
-            case "aïgue":
-                n = new Note(src.getValue().toLowerCase());
-                return n;
-            default:
-                return src;
+            case GRAVE:
+                src.setOctaveTransposition(Pitch.GRAVE);
+                break;
+            case MEDIUM:
+                src.setOctaveTransposition(Pitch.MEDIUM);
+                break;
+            case AÏGUE:
+                src.setOctaveTransposition(Pitch.AÏGUE);
+                break;
         }
     }
 
-    public void setCurrentPitch(String pitch) {
+    public void setCurrentPitch(Pitch.PitchType pitch) {
         System.out.println("[Pitch setCurrentPitch:" + pitch + "]");
         this.currentPitch = pitch;
     }

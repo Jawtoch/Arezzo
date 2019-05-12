@@ -2,6 +2,6 @@ package Arezzo.Modele;
 
 public interface ClavierDelegate {
 
-    void ajouterNote(Note note);
+    void ajouterNote(abc.notation.Note note);
 
 }

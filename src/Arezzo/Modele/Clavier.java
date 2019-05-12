@@ -51,7 +51,7 @@ public class Clavier implements Iterable<Touche>, ToucheDelegate {
     }
 
     @Override
-    public void touchUpInside(Note note) {
+    public void touchUpInside(abc.notation.Note note) {
         System.out.println("[Clavier touchUpInside:" + note + "]");
         if(this.delegate != null)
             this.delegate.ajouterNote(note);

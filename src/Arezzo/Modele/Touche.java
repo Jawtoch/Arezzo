@@ -1,11 +1,13 @@
 package Arezzo.Modele;
 
+import abc.notation.Note;
+
 public class Touche {
 
-    private Note note;
+    private abc.notation.Note note;
     ToucheDelegate delegate;
 
-    public Touche(Note note) {
+    public Touche(abc.notation.Note note) {
         System.out.println("[Touche init:" + note + "]");
         this.note = note;
     }
@@ -16,8 +18,14 @@ public class Touche {
             this.delegate.touchUpInside(this.getNote());
     }
 
-    public Note getNote() {
+    public abc.notation.Note getNote() {
         System.out.println("[Touche getNote:]");
+        try {
+            Note n = (Note) this.note.clone();
+            return n;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         return this.note;
     }
 

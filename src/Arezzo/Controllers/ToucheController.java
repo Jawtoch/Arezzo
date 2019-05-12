@@ -1,6 +1,8 @@
 package Arezzo.Controllers;
 
+import Arezzo.Modele.NoteFormatter;
 import Arezzo.Modele.Touche;
+import abc.notation.Note;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -12,8 +14,13 @@ public class ToucheController {
 
     @FXML public void initialize() throws Exception {
         System.out.println("[ToucheController initialize:]");
-        this.button.setText(touche.getNote().getValue());
-        if (this.touche.getNote().getValue().contains("^")) {
+
+        Note note = this.touche.getNote();
+        String name = NoteFormatter.format(note);
+
+        this.button.setText(name);
+
+        if (name.contains("^")) {
             this.button.setStyle("-fx-background-color: #000000");
             this.button.setPrefHeight(this.button.getPrefHeight() / 2);
         }
