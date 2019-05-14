@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import partition.Partition;
 
@@ -66,13 +67,25 @@ public class Main extends Application {
 
         hBox.getChildren().add(clavierFxmlLoader.load());
 
+        VBox vBox = new VBox();
+
         Pitch pitch = new Pitch();
         listeNotes.setPitch(pitch);
 
         FXMLLoader pitchFxmlLoader = new FXMLLoader();
         pitchFxmlLoader.setLocation(getClass().getResource("Vues/VuePitch.fxml"));
         pitchFxmlLoader.setControllerFactory(ic -> new PitchController(pitch));
-        hBox.getChildren().add(pitchFxmlLoader.load());
+        vBox.getChildren().add(pitchFxmlLoader.load());
+
+        Duration duration = new Duration();
+        listeNotes.setDuration(duration);
+
+        FXMLLoader durationFxmlLoader = new FXMLLoader();
+        durationFxmlLoader.setLocation(getClass().getResource("Vues/VueDuration.fxml"));
+        durationFxmlLoader.setControllerFactory(ic -> new DurationController(duration));
+        vBox.getChildren().add(durationFxmlLoader.load());
+
+        hBox.getChildren().add(vBox);
 
         root.setBottom(hBox);
 

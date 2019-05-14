@@ -1,7 +1,6 @@
 package Arezzo.Controllers;
 
 import Arezzo.Modele.ListeNotes;
-import Arezzo.Modele.Note;
 import Arezzo.Modele.NoteFormatter;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,8 +31,9 @@ public class PartitionController implements Observer {
 
     @FXML public void initialize() throws Exception {
         System.out.println("[PartitionController initialize:]");
-        this.image.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        this.image.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         this.partition.setMelodie("");
+        this.partition.setPreferedMaxWidth((int) this.image.getPrefWidth());
         this.image.setContent(new ImageView(partition.getImage()));
     }
 

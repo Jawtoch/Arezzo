@@ -10,6 +10,7 @@ import java.util.Observable;
 public class ListeNotes extends Observable implements Iterable<abc.notation.Note>, ClavierDelegate {
 
     private Pitch pitch;
+    private Duration duration;
     private ObservableList<abc.notation.Note> list = FXCollections.observableArrayList();
 
     public ListeNotes() {
@@ -21,6 +22,9 @@ public class ListeNotes extends Observable implements Iterable<abc.notation.Note
 
         if (this.pitch != null) {
             this.pitch.transform(note);
+        }
+        if (this.duration != null) {
+            this.duration.transform(note);
         }
         this.list.add(note);
 
@@ -71,5 +75,9 @@ public class ListeNotes extends Observable implements Iterable<abc.notation.Note
         this.list.set(index, note);
         setChanged();
         notifyObservers();
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 }

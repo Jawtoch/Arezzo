@@ -19,13 +19,13 @@ public class MenuController {
 
     @FXML public void initialize() throws Exception {
         System.out.println("[MenuController initialize:]");
-        ToggleGroup toggleGroup = new ToggleGroup();
+        /*ToggleGroup toggleGroup = new ToggleGroup();
 
         for(MidiDevice.Info info: MidiSystem.getMidiDeviceInfo()) {
             RadioMenuItem menuItem = new RadioMenuItem(info.getName());
             toggleGroup.getToggles().add(menuItem);
             this.devices.getItems().add(menuItem);
-        }
+        }*/
 
     }
 

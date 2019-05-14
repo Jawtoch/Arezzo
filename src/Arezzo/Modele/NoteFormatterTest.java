@@ -11,10 +11,9 @@ class NoteFormatterTest {
     void format() {
 
         Note note = new Note((byte) 0);
-        for(int i = 0; i < 12; i++) {
-            Note n = Note.transpose(note, i);
-            System.out.print(n.toString());
-            System.out.println(" -> " + NoteFormatter.format(n));
-        }
+        note.setStrictDuration(Duration.RONDE);
+
+        System.out.println(NoteFormatter.format(note));
+
     }
 }
