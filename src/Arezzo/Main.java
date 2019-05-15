@@ -2,13 +2,16 @@ package Arezzo;
 
 import Arezzo.Controllers.*;
 import Arezzo.Modele.*;
+import Arezzo.Vues.PopupWindow;
 import abc.notation.Note;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import partition.Partition;
 
@@ -91,10 +94,13 @@ public class Main extends Application {
 
         FXMLLoader listeFxmlLoader = new FXMLLoader();
         listeFxmlLoader.setLocation(getClass().getResource("Vues/VueListeNotes.fxml"));
-
         listeFxmlLoader.setControllerFactory(ic -> new ListeNotesController(listeNotes));
-        root.setRight(listeFxmlLoader.load());
+        //root.setRight(listeFxmlLoader.load());
 
+        Button button = new Button("Les notes");
+        button.setOnAction(new PopupWindow(listeFxmlLoader.load(), "ListeNotes"));
+        root.setRight(button);
+        
         primaryStage.setTitle("Arezzo");
         primaryStage.setScene(new Scene(root, 800, 300));
         primaryStage.show();
