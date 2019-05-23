@@ -6,10 +6,8 @@ import Arezzo.Modele.OctaveError;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.Observable;
@@ -21,12 +19,6 @@ public class ListeNotesController implements Observer, Initializable {
     private ListeNotes listeNotes;
 
     @FXML private ListView<Note> listView;
-
-    @FXML public void initialize() throws Exception {
-        System.out.println("[ListeNotesController initialize:]");
-        this.creerLaListe();
-
-    }
 
     /**
      * Affiche la liste des notes
@@ -44,55 +36,40 @@ public class ListeNotesController implements Observer, Initializable {
     private void creerLaListe() {
         System.out.println("[ListeNotesController creerLaListe:]");
         this.listView.setItems(this.listeNotes.getList());
-        this.listView.setCellFactory(new Callback<ListView<Note>, ListCell<Note>>() {
-            @Override
-            public ListCell<Note> call(ListView<Note> param) {
-                ListCell<Note> listCell = new ListCell<Note>() {
-                    @Override
-                    protected void updateItem(Note item, boolean empty) {
-                        super.updateItem(item, empty);
+        this.listView.setCellFactory(ic -> {
+            NoteCell noteCell = new NoteCell(this.listeNotes);
 
-                        if (empty || item == null) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            setText(item.getNote());
-                        }
-                    }
-                };
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem deleteMenu = new MenuItem("Effacer");
+            deleteMenu.setOnAction(event -> {
+                this.listeNotes.supprimer(noteCell.getIndex());
+            });
 
-                ContextMenu contextMenu = new ContextMenu();
-                MenuItem deleteMenu = new MenuItem("Effacer");
-                deleteMenu.setOnAction(event -> {
-                    listeNotes.supprimer(listCell.getIndex());
-                });
+            MenuItem toneUp = new MenuItem("Monter d'un 1/2 ton");
+            toneUp.setOnAction(event -> {
+                int index = noteCell.getIndex();
+                try {
+                    this.listeNotes.transpose(index, 1);
+                } catch (OctaveError e) {
+                    e.printStackTrace();
+                }
+            });
 
-                MenuItem toneUp = new MenuItem("Monter d'un 1/2 ton");
-                toneUp.setOnAction(event -> {
-                    int index = listCell.getIndex();
-                    try {
-                        listeNotes.transpose(index, 1);
-                    } catch (OctaveError e) {
-                        e.printStackTrace();
-                    }
-                });
+            MenuItem toneDown = new MenuItem("Descendre d'un 1/2 ton");
+            toneDown.setOnAction(event -> {
+                int index = noteCell.getIndex();
+                try {
+                    this.listeNotes.transpose(index, -1);
+                } catch (OctaveError e) {
+                    e.printStackTrace();
+                }
+            });
 
-                MenuItem toneDown = new MenuItem("Descendre d'un 1/2 ton");
-                toneDown.setOnAction(event -> {
-                    int index = listCell.getIndex();
-                    try {
-                        listeNotes.transpose(index, -1);
-                    } catch (OctaveError e) {
-                        e.printStackTrace();
-                    }
-                });
+            contextMenu.getItems().addAll(deleteMenu, toneUp, toneDown);
 
-                contextMenu.getItems().addAll(deleteMenu, toneUp, toneDown);
+            noteCell.setContextMenu(contextMenu);
 
-                listCell.setContextMenu(contextMenu);
-
-                return listCell;
-            }
+            return noteCell;
         });
     }
 

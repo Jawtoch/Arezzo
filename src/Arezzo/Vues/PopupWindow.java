@@ -24,7 +24,7 @@ public class PopupWindow implements EventHandler<ActionEvent> {
 
     @Override public void handle(ActionEvent event) {
         System.out.println("[PopupWindow handle:" + event + "]");
-        Scene scene = new Scene(this.parent, 100, 400);
+        Scene scene = new Scene(this.parent, 130, 400);
 
         Stage stage = new Stage();
         stage.setTitle(this.title);

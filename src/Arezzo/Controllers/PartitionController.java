@@ -104,6 +104,13 @@ public class PartitionController implements Observer {
         System.out.println("[PartitionController update:" + o + " " + arg + "]");
         ObservableList<Note> notes = this.listeNotes.getList();
 
+        Note lastNote = this.listeNotes.getLastNote();
+        if (lastNote != null) {
+            this.partition.setMelodie(lastNote.getNote());
+            this.listeNotes.setLastNote(null);
+            this.partition.play();
+        }
+
         double temps = 0;
 
         StringBuilder melodie = new StringBuilder();

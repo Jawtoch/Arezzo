@@ -99,7 +99,7 @@ public class Main extends Application {
         root.setRight(button);
 
         primaryStage.setTitle("Arezzo");
-        primaryStage.setScene(new Scene(root, 800, 300));
+        primaryStage.setScene(new Scene(root, 1000, 600));
 
         primaryStage.show();
     }

@@ -1,6 +1,6 @@
 package Arezzo.Modele;
 
-class Octave {
+public class Octave {
 
     int oct;
 
@@ -70,6 +70,20 @@ class Octave {
         }
 
         return newNote;
+    }
+
+    @Override
+    public String toString() {
+        switch (this.oct) {
+            case -1:
+                return "Grave";
+            case 0:
+                return "Medium";
+            case 1:
+                return "Aïgue";
+            default:
+                return "";
+        }
     }
 }
 

@@ -229,4 +229,53 @@ public class Note {
         System.out.println("[Note setValue:" + i + "]");
         this.value = i;
     }
+
+    /**
+     * Retourne le nom de la note en français
+     * @return la note
+     */
+    public String prettyName() {
+        System.out.println("[Note prettyName:]");
+
+        int val = this.getValue();
+        String name = "";
+        switch (val) {
+            case -1:
+                name = "Chut";
+                return name;
+            case 0:
+            case 1:
+                name = "Do";
+                break;
+            case 2:
+            case 3:
+                name = "Ré";
+                break;
+            case 4:
+                name = "Mi";
+                break;
+            case 5:
+            case 6:
+                name = "Fa";
+                break;
+            case 7:
+            case 8:
+                name = "Sol";
+                break;
+            case 9:
+            case 10:
+                name = "La";
+                break;
+            case 11:
+                name = "Si";
+                break;
+            default:
+                break;
+        }
+
+        if (this.accidental.equals("^"))
+            name = name + "#";
+
+        return name;
+    }
 }

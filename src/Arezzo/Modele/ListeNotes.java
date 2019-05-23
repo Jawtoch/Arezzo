@@ -11,6 +11,7 @@ public class ListeNotes extends Observable implements Iterable<Note>, ClavierDel
     private Pitch pitch;
     private Duration duration;
     private ObservableList<Note> list = FXCollections.observableArrayList();
+    private Note lastNote;
 
     /**
      * Une liste contenant les notes
@@ -25,6 +26,8 @@ public class ListeNotes extends Observable implements Iterable<Note>, ClavierDel
      */
     private void ajouter(Note note) {
         System.out.println("[ListeNotes ajouter:" + note + "]");
+
+        this.setLastNote(note);
 
         if (note.getValue() == -1) {
             this.list.add(note);
@@ -53,6 +56,7 @@ public class ListeNotes extends Observable implements Iterable<Note>, ClavierDel
         System.out.println("[ListeNotes supprimer:" + index + "]");
         Note n = this.list.get(index);
         n.setValue(-1);
+
         this.setChanged();
         this.notifyObservers();
     }
@@ -109,5 +113,21 @@ public class ListeNotes extends Observable implements Iterable<Note>, ClavierDel
     public void setDuration(Duration duration) {
         System.out.println("[ListeNotes setDuration:" + duration + "]");
         this.duration = duration;
+    }
+
+    /**
+     * Récupère la dernière note ajoutée
+     * @return la dernière note ajoutée
+     */
+    public Note getLastNote() {
+        return lastNote;
+    }
+
+    /**
+     * Définie la dernière note ajoutée
+     * @param lastNote la dernière note ajoutée
+     */
+    public void setLastNote(Note lastNote) {
+        this.lastNote = lastNote;
     }
 }
