@@ -1,11 +1,15 @@
 package Arezzo.Controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import partition.Partition;
 
-public class InstrumentsController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class InstrumentsController implements Initializable {
 
     @FXML private ToggleGroup toggleGroup;
     private Partition partition;
@@ -19,8 +23,8 @@ public class InstrumentsController {
         this.partition = partition;
     }
 
-    @FXML public void initialize() throws Exception {
-        System.out.println("[InstrumentsController initialize:]");
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("[InstrumentsController initialize:" + location + " " + resources + "]");
 
         this.toggleGroup.selectedToggleProperty().addListener(event -> {
             RadioButton radioButton = (RadioButton) this.toggleGroup.getSelectedToggle();

@@ -10,10 +10,6 @@ public class ToucheController {
 
     @FXML protected Button button;
 
-    @FXML public void initialize() throws Exception {
-        System.out.println("[ToucheController initialize:]");
-    }
-
     /**
      * Méthode appelée par le bouton en cas de clic. Notifie la touche du clic
      */

@@ -4,14 +4,17 @@ import Arezzo.Modele.ListeNotes;
 import Arezzo.Modele.Note;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import partition.Partition;
 
+import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
-public class PartitionController implements Observer {
+public class PartitionController implements Observer, Initializable {
 
     @FXML private ScrollPane image;
 
@@ -56,10 +59,9 @@ public class PartitionController implements Observer {
 
     /**
      * Bind la largeur de la partition avec la largeur du scrollPane
-     * @throws Exception
      */
-    @FXML public void initialize() throws Exception {
-        System.out.println("[PartitionController initialize:]");
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("[PartitionController initialize:" + location + " " + resources + "]");
         this.image.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         this.partition.setMelodie("");
         this.partition.setPreferedMaxWidth((int) this.image.getPrefWidth());

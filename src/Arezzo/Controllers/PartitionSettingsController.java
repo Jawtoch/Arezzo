@@ -21,9 +21,4 @@ abstract public class PartitionSettingsController {
         this.partition = partition;
     }
 
-    @FXML public void initialize() throws Exception {
-        System.out.println("[PartitionSettingsController initialize:]");
-    }
-
-
 }

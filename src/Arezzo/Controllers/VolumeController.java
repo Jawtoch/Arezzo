@@ -1,9 +1,13 @@
 package Arezzo.Controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import partition.Partition;
 
-public class VolumeController extends PartitionSettingsController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class VolumeController extends PartitionSettingsController implements Initializable {
 
     /**
      * Permet de modifier le volume de la partition.
@@ -16,8 +20,8 @@ public class VolumeController extends PartitionSettingsController {
         System.out.println("[VolumeController init:" + partition + "]");
     }
 
-    @FXML public void initialize() throws Exception {
-        System.out.println("[VolumeController initialize:]");
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("[VolumeController initialize:" + location + " " + resources + "]");
 
         this.label.setText("Volume");
 

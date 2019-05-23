@@ -10,10 +10,6 @@ public class MenuController {
         System.out.println("[MenuController init:" + clavier + "]");
     }
 
-    @FXML public void initialize() throws Exception {
-        System.out.println("[MenuController initialize:]");
-    }
-
     @FXML void quitButtonAction() {
         System.out.println("[MenuController quitButtonAction:]");
         Platform.exit();

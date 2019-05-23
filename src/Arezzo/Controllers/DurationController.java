@@ -2,11 +2,15 @@ package Arezzo.Controllers;
 
 import Arezzo.Modele.Duration;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class DurationController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class DurationController implements Initializable {
 
     @FXML private RadioButton crocheButton;
     @FXML private RadioButton noireButton;
@@ -25,8 +29,8 @@ public class DurationController {
         this.duration = duration;
     }
 
-    @FXML public void initialize() throws Exception {
-        System.out.println("[DurationController initialize:]");
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("[DurationController initialize:" + location + " " + resources + "]");
         this.toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(
                 this.crocheButton,

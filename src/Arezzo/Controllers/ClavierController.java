@@ -3,12 +3,16 @@ package Arezzo.Controllers;
 import Arezzo.Modele.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class ClavierController implements ClavierDelegate {
+public class ClavierController implements ClavierDelegate, Initializable {
 
     private Clavier clavier;
     private ListeNotes listeNotes;
@@ -18,10 +22,10 @@ public class ClavierController implements ClavierDelegate {
     /**
      * Contruit le clavier en fonction des notes des touches. Une noire sera représentée autrement qu'une blanche.
      * Ajoute une touche chut en bas du clavier
-     * @throws Exception
      */
-    @FXML public void initialize() throws Exception {
-        System.out.println("[ClavierController initialize:]");
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("[ClavierController initialize:" + location + " " + resources + "]");
 
         int toucheSize = 40;
         int lastXPosition = 0;
@@ -29,31 +33,35 @@ public class ClavierController implements ClavierDelegate {
         ArrayList<Button> noires = new ArrayList<>();
 
         for(Touche touche: this.clavier) {
-            FXMLLoader toucheFxmlLoader = new FXMLLoader();
-            toucheFxmlLoader.setLocation(getClass().getResource("../Vues/VueTouche.fxml"));
-            toucheFxmlLoader.setControllerFactory(ic -> new ToucheController(touche));
+            try {
+                FXMLLoader toucheFxmlLoader = new FXMLLoader();
+                toucheFxmlLoader.setLocation(getClass().getResource("../Vues/VueTouche.fxml"));
+                toucheFxmlLoader.setControllerFactory(ic -> new ToucheController(touche));
 
-            Button element = toucheFxmlLoader.load();
+                Button element = toucheFxmlLoader.load();
 
-            Note note = touche.getNote();
-            String name = note.getNote();
+                Note note = touche.getNote();
+                String name = note.getNote();
 
-            if (name.contains("^")) {
-                // Noire
-                element.relocate(lastXPosition - (toucheSize >> 1) + 5, 0);
-                element.setPrefHeight(element.getPrefHeight() / 2);
-                element.setPrefWidth(element.getPrefWidth() - 10);
-                element.setStyle("-fx-background-color: #000000");
-                noires.add(element);
-            } else {
-                // Blanche
-                element.relocate(lastXPosition, 0);
-                element.setPrefHeight(element.getPrefHeight() - 20);
-                element.toBack();
-                lastXPosition += toucheSize;
+                if (name.contains("^")) {
+                    // Noire
+                    element.relocate(lastXPosition - (toucheSize >> 1) + 5, 0);
+                    element.setPrefHeight(element.getPrefHeight() / 2);
+                    element.setPrefWidth(element.getPrefWidth() - 10);
+                    element.setStyle("-fx-background-color: #000000");
+                    noires.add(element);
+                } else {
+                    // Blanche
+                    element.relocate(lastXPosition, 0);
+                    element.setPrefHeight(element.getPrefHeight() - 20);
+                    element.toBack();
+                    lastXPosition += toucheSize;
+                }
+
+                this.pane.getChildren().add(element);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            this.pane.getChildren().add(element);
         }
 
         for(Button button: noires) {
@@ -66,12 +74,16 @@ public class ClavierController implements ClavierDelegate {
         chutFxmlLoader.setLocation(getClass().getResource("../Vues/VueTouche.fxml"));
         chutFxmlLoader.setControllerFactory(ic -> new ChutController(chut));
 
-        Button chutButton = chutFxmlLoader.load();
-        chutButton.setPrefWidth(lastXPosition);
-        chutButton.setPrefHeight(20);
+        try {
+            Button chutButton = chutFxmlLoader.load();
+            chutButton.setPrefWidth(lastXPosition);
+            chutButton.setPrefHeight(20);
 
-        chutButton.relocate(0, this.pane.getPrefHeight() - 30);
-        this.pane.getChildren().add(chutButton);
+            chutButton.relocate(0, this.pane.getPrefHeight() - 30);
+            this.pane.getChildren().add(chutButton);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

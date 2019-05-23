@@ -2,8 +2,12 @@ package Arezzo.Controllers;
 
 import Arezzo.Modele.Chut;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 
-public class ChutController extends ToucheController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ChutController extends ToucheController implements Initializable {
 
     /**
      * Crée une touche chut à l'écran
@@ -14,10 +18,11 @@ public class ChutController extends ToucheController {
         System.out.println("[ChutController init:]");
     }
 
-    @Override @FXML public void initialize() {
-        System.out.println("[ChutController initialize:]");
-        String name = "Chut";
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("[ChutControler initialize:" + location + " " + resources + "]");
+        String name = "Chut";
         this.button.setText(name);
     }
 }

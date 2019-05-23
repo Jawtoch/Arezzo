@@ -2,10 +2,14 @@ package Arezzo.Controllers;
 
 import Arezzo.Modele.Pitch;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-public class PitchController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PitchController implements Initializable {
 
     @FXML private RadioButton lowPitchButton;
     @FXML private RadioButton mediumPitchButton;
@@ -14,8 +18,8 @@ public class PitchController {
     private ToggleGroup toggleGroup;
     private Pitch pitch;
 
-    @FXML public void initialize() throws Exception {
-        System.out.println("[PitchController initialize:]");
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("[PitchController initialize:" + location + " " + resources + "]");
 
         this.toggleGroup = new ToggleGroup();
 

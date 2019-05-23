@@ -1,9 +1,13 @@
 package Arezzo.Controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import partition.Partition;
 
-public class TempoController extends PartitionSettingsController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class TempoController extends PartitionSettingsController implements Initializable {
 
     /**
      * Permet de modifier le tempo de la partition
@@ -16,10 +20,9 @@ public class TempoController extends PartitionSettingsController {
 
     /**
      * Paramètre le slider
-     * @throws Exception
      */
-    @FXML public void initialize() throws Exception {
-        System.out.println("[VolumeController initialize:]");
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("[VolumeController initialize:" + location + " " + resources + "]");
 
         this.label.setText("Tempo");
 
