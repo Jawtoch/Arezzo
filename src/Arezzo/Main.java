@@ -36,7 +36,7 @@ public class Main extends Application {
         BorderPane root = new BorderPane();
 
         FXMLLoader partitionFxmlLoader = new FXMLLoader();
-        partitionFxmlLoader.setLocation(getClass().getResource("Vues/VuePartition.fxml"));
+        partitionFxmlLoader.setLocation(getClass().getResource("/fxml/VuePartition.fxml"));
         PartitionController partitionController = new PartitionController(partition);
         partitionFxmlLoader.setControllerFactory(ic -> {
             partitionController.setListeNote(listeNotes);
@@ -45,7 +45,7 @@ public class Main extends Application {
         root.setCenter(partitionFxmlLoader.load());
 
         FXMLLoader menuFxmlLoader = new FXMLLoader();
-        menuFxmlLoader.setLocation(getClass().getResource("Vues/VueMenu.fxml"));
+        menuFxmlLoader.setLocation(getClass().getResource("/fxml/VueMenu.fxml"));
         menuFxmlLoader.setControllerFactory(ic -> new MenuController(clavier));
         root.setTop(menuFxmlLoader.load());
 
@@ -53,7 +53,7 @@ public class Main extends Application {
 
 
         FXMLLoader clavierFxmlLoader = new FXMLLoader();
-        clavierFxmlLoader.setLocation(getClass().getResource("Vues/VueClavier.fxml"));
+        clavierFxmlLoader.setLocation(getClass().getResource("/fxml/VueClavier.fxml"));
         clavierFxmlLoader.setControllerFactory(ic -> {
             ClavierController clavierController = new ClavierController(clavier);
             clavierController.setListeNotes(listeNotes);
@@ -69,7 +69,7 @@ public class Main extends Application {
         listeNotes.setPitch(pitch);
 
         FXMLLoader pitchFxmlLoader = new FXMLLoader();
-        pitchFxmlLoader.setLocation(getClass().getResource("Vues/VuePitch.fxml"));
+        pitchFxmlLoader.setLocation(getClass().getResource("/fxml/VuePitch.fxml"));
         pitchFxmlLoader.setControllerFactory(ic -> new PitchController(pitch));
         vBox.getChildren().add(pitchFxmlLoader.load());
 
@@ -77,21 +77,21 @@ public class Main extends Application {
         listeNotes.setDuration(duration);
 
         FXMLLoader durationFxmlLoader = new FXMLLoader();
-        durationFxmlLoader.setLocation(getClass().getResource("Vues/VueDuration.fxml"));
+        durationFxmlLoader.setLocation(getClass().getResource("/fxml/VueDuration.fxml"));
         durationFxmlLoader.setControllerFactory(ic -> new DurationController(duration));
         vBox.getChildren().add(durationFxmlLoader.load());
 
         hBox.setCenter(vBox);
 
         FXMLLoader toolsFxmlLoader = new FXMLLoader();
-        toolsFxmlLoader.setLocation(getClass().getResource("Vues/VueTools.fxml"));
+        toolsFxmlLoader.setLocation(getClass().getResource("/fxml/VueTools.fxml"));
         toolsFxmlLoader.setControllerFactory(ic -> new ToolsController(partitionController));
         hBox.setRight(toolsFxmlLoader.load());
 
         root.setBottom(hBox);
 
         FXMLLoader listeFxmlLoader = new FXMLLoader();
-        listeFxmlLoader.setLocation(getClass().getResource("Vues/VueListeNotes.fxml"));
+        listeFxmlLoader.setLocation(getClass().getResource("/fxml/VueListeNotes.fxml"));
         listeFxmlLoader.setControllerFactory(ic -> new ListeNotesController(listeNotes));
 
         Button button = new Button("Les notes");

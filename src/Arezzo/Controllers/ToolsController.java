@@ -75,7 +75,7 @@ public class ToolsController implements Initializable {
         vBoxChildren.add(button);
 
         FXMLLoader volumeFxmlLoader = new FXMLLoader();
-        volumeFxmlLoader.setLocation(getClass().getResource("../Vues/VuePartitionSettingsController.fxml"));
+        volumeFxmlLoader.setLocation(getClass().getResource("/fxml/VuePartitionSettingsController.fxml"));
         volumeFxmlLoader.setControllerFactory(ic -> new VolumeController(partition));
         try {
             vBoxChildren.add(volumeFxmlLoader.load());
@@ -84,7 +84,7 @@ public class ToolsController implements Initializable {
         }
 
         FXMLLoader tempoFxmlLoader = new FXMLLoader();
-        tempoFxmlLoader.setLocation(getClass().getResource("../Vues/VuePartitionSettingsController.fxml"));
+        tempoFxmlLoader.setLocation(getClass().getResource("/fxml/VuePartitionSettingsController.fxml"));
         tempoFxmlLoader.setControllerFactory(ic -> {
             this.tempoController = new TempoController(partition);
             return this.tempoController;
@@ -96,7 +96,7 @@ public class ToolsController implements Initializable {
         }
 
         FXMLLoader testFXML = new FXMLLoader();
-        testFXML.setLocation(getClass().getResource("../Vues/VueInstruments.fxml"));
+        testFXML.setLocation(getClass().getResource("/fxml/VueInstruments.fxml"));
         testFXML.setControllerFactory(ic -> new InstrumentsController(partition));
         try {
             vBoxChildren.add(testFXML.load());

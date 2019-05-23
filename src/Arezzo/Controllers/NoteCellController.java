@@ -28,7 +28,7 @@ public class NoteCellController {
         this.listeNotes = listeNotes;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Vues/VueNote.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VueNote.fxml"));
             loader.setController(this);
 
             this.hBox = loader.load();

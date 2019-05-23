@@ -35,7 +35,7 @@ public class ClavierController implements ClavierDelegate, Initializable {
         for(Touche touche: this.clavier) {
             try {
                 FXMLLoader toucheFxmlLoader = new FXMLLoader();
-                toucheFxmlLoader.setLocation(getClass().getResource("../Vues/VueTouche.fxml"));
+                toucheFxmlLoader.setLocation(getClass().getResource("/fxml/VueTouche.fxml"));
                 toucheFxmlLoader.setControllerFactory(ic -> new ToucheController(touche));
 
                 Button element = toucheFxmlLoader.load();
@@ -71,7 +71,7 @@ public class ClavierController implements ClavierDelegate, Initializable {
         Chut chut = new Chut();
         chut.delegate = this.clavier;
         FXMLLoader chutFxmlLoader = new FXMLLoader();
-        chutFxmlLoader.setLocation(getClass().getResource("../Vues/VueTouche.fxml"));
+        chutFxmlLoader.setLocation(getClass().getResource("/fxml/VueTouche.fxml"));
         chutFxmlLoader.setControllerFactory(ic -> new ChutController(chut));
 
         try {

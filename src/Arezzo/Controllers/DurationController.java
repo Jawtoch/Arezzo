@@ -51,7 +51,7 @@ public class DurationController implements Initializable {
             RadioButton radioButton = (RadioButton) toggle;
             ImageView imageView = (ImageView) radioButton.getGraphic();
             String name = radioButton.getText().toLowerCase() + ".png";
-            imageView.setImage(new Image(getClass().getResourceAsStream("../ressources/images/" + name)));
+            imageView.setImage(new Image(getClass().getResourceAsStream("/images/" + name)));
         }
 
 
