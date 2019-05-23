@@ -1,24 +1,37 @@
 package Arezzo.Modele;
 
-import abc.notation.Note;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Iterator;
 import java.util.Observable;
 
-public class ListeNotes extends Observable implements Iterable<abc.notation.Note>, ClavierDelegate {
+public class ListeNotes extends Observable implements Iterable<Note>, ClavierDelegate {
 
     private Pitch pitch;
     private Duration duration;
-    private ObservableList<abc.notation.Note> list = FXCollections.observableArrayList();
+    private ObservableList<Note> list = FXCollections.observableArrayList();
 
+    /**
+     * Une liste contenant les notes
+     */
     public ListeNotes() {
         System.out.println("[ListeNotes init:]");
     }
 
-    private void ajouter(abc.notation.Note note) {
+    /**
+     * Ajoute une note à la liste, et notifie ses observers
+     * @param note la note à ajouter
+     */
+    private void ajouter(Note note) {
         System.out.println("[ListeNotes ajouter:" + note + "]");
+
+        if (note.getValue() == -1) {
+            this.list.add(note);
+            setChanged();
+            notifyObservers();
+            return;
+        }
 
         if (this.pitch != null) {
             this.pitch.transform(note);
@@ -32,52 +45,69 @@ public class ListeNotes extends Observable implements Iterable<abc.notation.Note
         notifyObservers();
     }
 
+    /**
+     * Supprime une note à un index donné. Supprimer une note revient à la transformer en silence
+     * @param index la note à supprimer
+     */
     public void supprimer(int index) {
         System.out.println("[ListeNotes supprimer:" + index + "]");
-        this.list.remove(index);
+        Note n = this.list.get(index);
+        n.setValue(-1);
         this.setChanged();
         this.notifyObservers();
     }
 
-    private boolean contains(abc.notation.Note note) {
-        System.out.println("[ListeNotes contains:" + note + "]");
-        return this.list.contains(note);
-    }
-
+    /**
+     * Définie l'objet Pitch permettant de changer l'octave des futures notes qui seront ajoutées
+     * @param p
+     */
     public void setPitch(Pitch p) {
         System.out.println("[ListeNotes setPitch:" + p + "]");
         this.pitch = p;
     }
 
-    public ObservableList<abc.notation.Note> getList() {
+    /**
+     * La liste des notes
+     * @return la liste
+     */
+    public ObservableList<Note> getList() {
         System.out.println("[ListeNotes getList:]");
         return this.list;
     }
 
-    @Override public Iterator<abc.notation.Note> iterator() {
+    @Override public Iterator<Note> iterator() {
         System.out.println("[ListeNotes iterator:]");
         return this.list.iterator();
     }
 
     @Override
-    public void ajouterNote(abc.notation.Note note) {
+    public void ajouterNote(Note note) {
         System.out.println("[ListeNotes ajouterNote:" + note + "]");
         this.ajouter(note);
     }
 
-    public Note get(int index) {
-        System.out.println("[ListeNotes get:" + index + "]");
-        return this.list.get(index);
+    /**
+     * Transpose une note d'un nombre donné de demi-tons, à un index donné. En cas d'index incorrect, ne fait rien
+     * @param index l'index de la note à transposer
+     * @param semitones le nombre de demi-tons à transposer
+     * @throws OctaveError si la note ne peut être transposée
+     */
+    public void transpose(int index, int semitones) throws OctaveError {
+        System.out.println("[ListeNotes transpose:" + index + " " + semitones + "]");
+        Note note = this.list.get(index);
+        if (note != null) {
+            note.transpose(semitones);
+            setChanged();
+            notifyObservers();
+        }
     }
 
-    public void set(int index, Note note) {
-        System.out.println("[ListeNotes set:" + index + " " + note + "]");
-        this.list.set(index, note);
-        setChanged();
-        notifyObservers();
-    }
-
+    /**
+     * Définie l'objet duration, permettant de changer la durée des futures notes qui seront ajoutées
+     * @param duration
+     */
     public void setDuration(Duration duration) {
+        System.out.println("[ListeNotes setDuration:" + duration + "]");
         this.duration = duration;
     }
 }

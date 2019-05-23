@@ -2,6 +2,10 @@ package Arezzo.Modele;
 
 public interface ClavierDelegate {
 
-    void ajouterNote(abc.notation.Note note);
+    /**
+     * Signale au délégué qu'une note a été envoyée par le clavier
+     * @param note la note envoyée
+     */
+    void ajouterNote(Note note);
 
 }

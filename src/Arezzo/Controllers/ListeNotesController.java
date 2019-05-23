@@ -1,8 +1,8 @@
 package Arezzo.Controllers;
 
 import Arezzo.Modele.ListeNotes;
-import Arezzo.Modele.NoteFormatter;
-import abc.notation.Note;
+import Arezzo.Modele.Note;
+import Arezzo.Modele.OctaveError;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
@@ -20,7 +20,7 @@ public class ListeNotesController implements Observer, Initializable {
 
     private ListeNotes listeNotes;
 
-    @FXML private ListView<abc.notation.Note> listView;
+    @FXML private ListView<Note> listView;
 
     @FXML public void initialize() throws Exception {
         System.out.println("[ListeNotesController initialize:]");
@@ -28,19 +28,26 @@ public class ListeNotesController implements Observer, Initializable {
 
     }
 
+    /**
+     * Affiche la liste des notes
+     * @param listeNotes la liste à afficher
+     */
     public ListeNotesController(ListeNotes listeNotes) {
         System.out.println("[ListeNotesController init:" + listeNotes + "]");
         this.listeNotes = listeNotes;
         this.listeNotes.addObserver(this);
     }
 
+    /**
+     * Actualise la liste
+     */
     private void creerLaListe() {
         System.out.println("[ListeNotesController creerLaListe:]");
         this.listView.setItems(this.listeNotes.getList());
-        this.listView.setCellFactory(new Callback<ListView<abc.notation.Note>, ListCell<abc.notation.Note>>() {
+        this.listView.setCellFactory(new Callback<ListView<Note>, ListCell<Note>>() {
             @Override
-            public ListCell<abc.notation.Note> call(ListView<abc.notation.Note> param) {
-                ListCell<abc.notation.Note> listCell = new ListCell<Note>() {
+            public ListCell<Note> call(ListView<Note> param) {
+                ListCell<Note> listCell = new ListCell<Note>() {
                     @Override
                     protected void updateItem(Note item, boolean empty) {
                         super.updateItem(item, empty);
@@ -49,7 +56,7 @@ public class ListeNotesController implements Observer, Initializable {
                             setText(null);
                             setGraphic(null);
                         } else {
-                            setText(NoteFormatter.format(item));
+                            setText(item.getNote());
                         }
                     }
                 };
@@ -63,17 +70,21 @@ public class ListeNotesController implements Observer, Initializable {
                 MenuItem toneUp = new MenuItem("Monter d'un 1/2 ton");
                 toneUp.setOnAction(event -> {
                     int index = listCell.getIndex();
-                    Note note = listeNotes.get(index);
-                    Note transposedNote = Note.transpose(note, 1);
-                    listeNotes.set(index, transposedNote);
+                    try {
+                        listeNotes.transpose(index, 1);
+                    } catch (OctaveError e) {
+                        e.printStackTrace();
+                    }
                 });
 
                 MenuItem toneDown = new MenuItem("Descendre d'un 1/2 ton");
                 toneDown.setOnAction(event -> {
                     int index = listCell.getIndex();
-                    Note note = listeNotes.get(index);
-                    Note transposedNote = Note.transpose(note, -1);
-                    listeNotes.set(index, transposedNote);
+                    try {
+                        listeNotes.transpose(index, -1);
+                    } catch (OctaveError e) {
+                        e.printStackTrace();
+                    }
                 });
 
                 contextMenu.getItems().addAll(deleteMenu, toneUp, toneDown);

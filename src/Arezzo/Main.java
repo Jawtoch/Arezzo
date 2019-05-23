@@ -3,15 +3,12 @@ package Arezzo;
 import Arezzo.Controllers.*;
 import Arezzo.Modele.*;
 import Arezzo.Vues.PopupWindow;
-import abc.notation.Note;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import partition.Partition;
 
@@ -29,15 +26,9 @@ public class Main extends Application {
         //String[] notes = {"C", "^C", "D", "^D", "E", "F", "^F", "G", "^G", "A", "^A", "B"};
         Clavier clavier = new Clavier();
 
-        abc.notation.Note note = new abc.notation.Note((byte)0);
-
-        //for (String value: notes) {
-        //    clavier.ajouterTouches(new Touche(new Note(value)));
-        //}
-
         for(int i = 0; i < 12; i++) {
-            Note n = Note.transpose(note, i);
-            clavier.ajouterTouches(new Touche(n));
+            Note note = new Note(i);
+            clavier.ajouterTouches(new Touche(note));
         }
 
         ListeNotes listeNotes = new ListeNotes();
@@ -58,7 +49,8 @@ public class Main extends Application {
         menuFxmlLoader.setControllerFactory(ic -> new MenuController(clavier));
         root.setTop(menuFxmlLoader.load());
 
-        HBox hBox = new HBox();
+        BorderPane hBox = new BorderPane();
+
 
         FXMLLoader clavierFxmlLoader = new FXMLLoader();
         clavierFxmlLoader.setLocation(getClass().getResource("Vues/VueClavier.fxml"));
@@ -68,9 +60,10 @@ public class Main extends Application {
             return clavierController;
         });
 
-        hBox.getChildren().add(clavierFxmlLoader.load());
+        hBox.setLeft(clavierFxmlLoader.load());
 
         VBox vBox = new VBox();
+        vBox.setSpacing(10);
 
         Pitch pitch = new Pitch();
         listeNotes.setPitch(pitch);
@@ -88,21 +81,26 @@ public class Main extends Application {
         durationFxmlLoader.setControllerFactory(ic -> new DurationController(duration));
         vBox.getChildren().add(durationFxmlLoader.load());
 
-        hBox.getChildren().add(vBox);
+        hBox.setCenter(vBox);
+
+        FXMLLoader toolsFxmlLoader = new FXMLLoader();
+        toolsFxmlLoader.setLocation(getClass().getResource("Vues/VueTools.fxml"));
+        toolsFxmlLoader.setControllerFactory(ic -> new ToolsController(partitionController));
+        hBox.setRight(toolsFxmlLoader.load());
 
         root.setBottom(hBox);
 
         FXMLLoader listeFxmlLoader = new FXMLLoader();
         listeFxmlLoader.setLocation(getClass().getResource("Vues/VueListeNotes.fxml"));
         listeFxmlLoader.setControllerFactory(ic -> new ListeNotesController(listeNotes));
-        //root.setRight(listeFxmlLoader.load());
 
         Button button = new Button("Les notes");
         button.setOnAction(new PopupWindow(listeFxmlLoader.load(), "ListeNotes"));
         root.setRight(button);
-        
+
         primaryStage.setTitle("Arezzo");
         primaryStage.setScene(new Scene(root, 800, 300));
+
         primaryStage.show();
     }
 

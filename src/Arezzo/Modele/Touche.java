@@ -1,32 +1,36 @@
 package Arezzo.Modele;
 
-import abc.notation.Note;
-
 public class Touche {
 
-    private abc.notation.Note note;
-    ToucheDelegate delegate;
+    protected final Note note;
+    public ToucheDelegate delegate;
 
-    public Touche(abc.notation.Note note) {
+    /**
+     * Touche d'un clavier, contenant une note
+     * @param note la note de la touche
+     */
+    public Touche(Note note) {
         System.out.println("[Touche init:" + note + "]");
         this.note = note;
     }
 
+    /**
+     * Un appui sur la touche
+     */
     public void pressed() {
         System.out.println("[Touche pressed:]");
         if (this.delegate != null)
             this.delegate.touchUpInside(this.getNote());
     }
 
-    public abc.notation.Note getNote() {
+    /**
+     * Récupère une copie de la note de la touche
+     * @return la note de la touche
+     */
+    public Note getNote() {
         System.out.println("[Touche getNote:]");
-        try {
-            Note n = (Note) this.note.clone();
-            return n;
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return this.note;
+        Note n = new Note(this.note.getValue());
+        return n;
     }
 
 }

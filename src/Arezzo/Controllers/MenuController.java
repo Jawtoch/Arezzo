@@ -4,10 +4,6 @@ import Arezzo.Modele.Clavier;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.ToggleGroup;
-
-import javax.sound.midi.*;
 
 public class MenuController {
 

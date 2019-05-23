@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="100.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Arezzo.Controllers.DurationController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="147.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Arezzo.Controllers.DurationController">
    <children>
-      <RadioButton fx:id="crocheButton" mnemonicParsing="false" text="CROCHE" />
-      <RadioButton fx:id="noireButton" mnemonicParsing="false" text="NOIRE" />
-      <RadioButton fx:id="blancheButton" mnemonicParsing="false" text="BLANCHE" />
-      <RadioButton fx:id="rondeButton" mnemonicParsing="false" text="RONDE" />
+      <RadioButton fx:id="crocheButton" mnemonicParsing="false" text="CROCHE">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic></RadioButton>
+      <RadioButton fx:id="noireButton" mnemonicParsing="false" text="NOIRE">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic></RadioButton>
+      <RadioButton fx:id="blancheButton" mnemonicParsing="false" text="BLANCHE">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic></RadioButton>
+      <RadioButton fx:id="rondeButton" mnemonicParsing="false" text="RONDE">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic></RadioButton>
    </children>
 </VBox>

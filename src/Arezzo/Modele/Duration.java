@@ -1,29 +1,34 @@
 package Arezzo.Modele;
 
-import abc.notation.Note;
-
 public class Duration {
 
     private DurationType currentDuration;
 
-    static final short CROCHE = 48;
-    static final short NOIRE = 96;
-    static final short BLANCHE = 192;
-    static final short RONDE = 384;
+    static final int CROCHE = 1/2;
+    static final int NOIRE = 1;
+    static final int BLANCHE = 2;
+    static final int RONDE = 4;
 
     public enum DurationType {
         CROCHE, NOIRE, BLANCHE, RONDE;
     }
 
+    /**
+     * Permet de changer la durée des notes
+     */
     public Duration() {
         System.out.println("[Duration init:]");
         this.currentDuration = DurationType.NOIRE;
     }
 
+    /**
+     * Transforme une note en fonction de la durée actuelle
+     * @param note la note à modifier
+     */
     void transform(Note note) {
         System.out.println("[Duration transform:" + note + "]");
 
-        short value = NOIRE;
+        int value = NOIRE;
 
         switch (this.currentDuration) {
             case NOIRE:
@@ -39,9 +44,13 @@ public class Duration {
                 value = BLANCHE;
                 break;
         }
-        note.setStrictDuration(value);
+        note.setDuration(value);
     }
 
+    /**
+     * Définie la durée actuelle
+     * @param duration une durée
+     */
     public void setCurrentDuration(DurationType duration) {
         System.out.println("[Duration setCurrentDuration:" + duration + "]");
         this.currentDuration = duration;

@@ -33,6 +33,10 @@ public class PitchController {
         });
     }
 
+    /**
+     * Permet de modifier l'octave
+     * @param pitch
+     */
     public PitchController(Pitch pitch) {
         System.out.println("[PitchController init:]");
         this.pitch = pitch;
